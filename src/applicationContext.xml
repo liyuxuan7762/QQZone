@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<beans>
+    <bean id="userBasicDAO" class="com.atguigu.qqzone.dao.impl.UserBasicDAOImpl"></bean>
+    <bean id="topicDAO" class="com.atguigu.qqzone.dao.impl.TopicDAOImpl"></bean>
+    <bean id="replyDAO" class="com.atguigu.qqzone.dao.impl.ReplyDAOImpl"></bean>
+    <bean id="hostReplyDAO" class="com.atguigu.qqzone.dao.impl.HostReplyDAOImpl"></bean>
+    <bean id="userBasicService" class="com.atguigu.qqzone.dao.service.impl.UserBasicServiceImpl">
+        <property name="userBasicDAO" ref="userBasicDAO"></property>
+    </bean>
+    <bean id="topicService" class="com.atguigu.qqzone.dao.service.impl.TopicServiceImpl">
+        <property name="topicDAO" ref="topicDAO"></property>
+        <property name="userBasicService" ref="userBasicService"></property>
+        <property name="replyService" ref="replyService"></property>
+    </bean>
+    <bean id="replyService" class="com.atguigu.qqzone.dao.service.impl.ReplyServiceImpl">
+        <property name="replyDAO" ref="replyDAO"></property>
+        <property name="hostReplyService" ref="hostReplyService"></property>
+        <property name="userBasicService" ref="userBasicService"></property>
+    </bean>
+    <bean id="hostReplyService" class="com.atguigu.qqzone.dao.service.impl.HostReplyServiceImpl">
+        <property name="hostReplyDAO" ref="hostReplyDAO"></property>
+    </bean>
+
+    <bean id="user" class="com.atguigu.qqzone.controller.UserController">
+        <property name="topicService" ref="topicService"></property>
+        <property name="userBasicService" ref="userBasicService"></property>
+    </bean>
+    <bean id="page" class="com.atguigu.myssm.myspringmvc.PageController"></bean>
+    <bean id="topic" class="com.atguigu.qqzone.controller.TopicController">
+        <property name="topicService" ref="topicService"></property>
+        <property name="replyService" ref="replyService"></property>
+    </bean>
+    <bean id="reply" class="com.atguigu.qqzone.controller.ReplyController">
+        <property name="replyService" ref="replyService"></property>
+    </bean>
+</beans>

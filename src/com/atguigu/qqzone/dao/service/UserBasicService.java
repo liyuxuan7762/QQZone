@@ -1,0 +1,12 @@
+package com.atguigu.qqzone.dao.service;
+
+import com.atguigu.qqzone.pojo.UserBasic;
+
+import java.util.List;
+
+public interface UserBasicService {
+    UserBasic login(String loginId, String pwd);
+    List<UserBasic> getFriendList(UserBasic userBasic);
+    // 根据id获取用户信息
+    UserBasic getUserBasicById(Integer id);
+}
